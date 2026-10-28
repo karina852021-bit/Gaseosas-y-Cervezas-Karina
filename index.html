@@ -1,0 +1,288 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cervezas y Gaseosas Karina</title>
+    <!-- Fuentes de Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Iconos FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Configuración del fondo con la imagen de ImgBB */
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #12161f;
+            /* CAPA OSCURA + TU IMAGEN DE IMGBB */
+            background-image: 
+                linear-gradient(rgba(10, 15, 25, 0.65), rgba(10, 15, 25, 0.85)),
+                url('https://i.ibb.co/rffMKVL6/Screenshot-20261027-220150-Maps.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #ffffff;
+            padding: 20px 15px;
+        }
+
+        /* Encabezado */
+        .header {
+            text-align: center;
+            margin-top: 15px;
+            margin-bottom: 25px;
+            width: 100%;
+            max-width: 650px;
+        }
+
+        .title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 2rem;
+            line-height: 1.25;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #ffffff;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.95), 0 0 30px rgba(230, 57, 70, 0.6);
+        }
+
+        /* Tarjeta Principal Glassmorphism */
+        .main-card {
+            background: rgba(18, 22, 33, 0.88);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 24px;
+            width: 100%;
+            max-width: 480px;
+            padding: 24px 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+            margin-bottom: 30px;
+        }
+
+        /* Pestañas / Botones de Categoría */
+        .tabs-container {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 22px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 15px 10px;
+            border: none;
+            border-radius: 14px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .tab-btn.active-gaseosas {
+            background: linear-gradient(135deg, #e63946, #b71c1c);
+            box-shadow: 0 6px 20px rgba(230, 57, 70, 0.5);
+            border-color: transparent;
+        }
+
+        .tab-btn.active-cervezas {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.5);
+            border-color: transparent;
+        }
+
+        /* Lista de Productos */
+        .products-list {
+            display: none;
+            flex-direction: column;
+            gap: 12px;
+            animation: fadeIn 0.35s ease forwards;
+        }
+
+        .products-list.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .product-item {
+            background: rgba(255, 255, 255, 0.06);
+            border-left: 5px solid #ffb703;
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .product-name {
+            font-weight: 600;
+            font-size: 0.98rem;
+            color: #f8fafc;
+        }
+
+        .product-price {
+            font-weight: 800;
+            font-size: 1.15rem;
+            color: #ffb703;
+            background: rgba(255, 183, 3, 0.15);
+            padding: 6px 14px;
+            border-radius: 8px;
+            white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        /* Pie de Página */
+        .footer {
+            width: 100%;
+            max-width: 480px;
+            background: rgba(10, 14, 23, 0.92);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 18px;
+            padding: 18px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+        }
+
+        .contact-link {
+            color: #ffb703;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.05rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .support-link {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.92rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        @media (max-width: 480px) {
+            .title { font-size: 1.55rem; }
+            .product-name { font-size: 0.9rem; }
+            .product-price { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Encabezado -->
+    <header class="header">
+        <h1 class="title">BIENVENIDOS A CERVEZAS Y GASEOSAS KARINA</h1>
+    </header>
+
+    <!-- Menú Interactivo de Productos -->
+    <main class="main-card">
+        <div class="tabs-container">
+            <button class="tab-btn active-gaseosas" id="btn-gaseosas" onclick="showCategory('gaseosas')">
+                <i class="fa-solid fa-bottle-water"></i> Gaseosas
+            </button>
+            <button class="tab-btn" id="btn-cervezas" onclick="showCategory('cervezas')">
+                <i class="fa-solid fa-beer-mug-empty"></i> Cervezas
+            </button>
+        </div>
+
+        <!-- Lista Gaseosas -->
+        <div id="gaseosas" class="products-list active">
+            <div class="product-item">
+                <span class="product-name">Gaseosa Coca Cola 1 1/2 L</span>
+                <span class="product-price">S/ 8.00</span>
+            </div>
+            <div class="product-item">
+                <span class="product-name">Gaseosa Coca Cola 2 1/2 L</span>
+                <span class="product-price">S/ 10.00</span>
+            </div>
+            <div class="product-item">
+                <span class="product-name">Gaseosa Coca Cola 3 L</span>
+                <span class="product-price">S/ 14.00</span>
+            </div>
+        </div>
+
+        <!-- Lista Cervezas -->
+        <div id="cervezas" class="products-list">
+            <div class="product-item">
+                <span class="product-name">Cerveza Pilsen Callao 630 ML</span>
+                <span class="product-price">S/ 8.00</span>
+            </div>
+            <div class="product-item">
+                <span class="product-name">Cerveza Cusqueña (Trigo) 620 ML</span>
+                <span class="product-price">S/ 8.00</span>
+            </div>
+        </div>
+    </main>
+
+    <!-- Pie de Página / Contactos -->
+    <footer class="footer">
+        <div>
+            <a href="tel:998819296" class="contact-link">
+                <i class="fa-solid fa-phone"></i> Teléfono: 998819296
+            </a>
+        </div>
+        <div>
+            <a href="mailto:karina85.2021@gmail.com" class="support-link">
+                <i class="fa-solid fa-envelope"></i> Soporte: karina85.2021@gmail.com
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        function showCategory(category) {
+            const listGaseosas = document.getElementById('gaseosas');
+            const listCervezas = document.getElementById('cervezas');
+            const btnGaseosas = document.getElementById('btn-gaseosas');
+            const btnCervezas = document.getElementById('btn-cervezas');
+
+            if (category === 'gaseosas') {
+                listGaseosas.classList.add('active');
+                listCervezas.classList.remove('active');
+                btnGaseosas.className = 'tab-btn active-gaseosas';
+                btnCervezas.className = 'tab-btn';
+            } else {
+                listCervezas.classList.add('active');
+                listGaseosas.classList.remove('active');
+                btnCervezas.className = 'tab-btn active-cervezas';
+                btnGaseosas.className = 'tab-btn';
+            }
+        }
+    </script>
+</body>
+</html>
+
